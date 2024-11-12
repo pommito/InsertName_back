@@ -23,7 +23,24 @@ class RevenueController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json(['message' => 'Hello World']);
+        $request->validate([
+            'id_user' => 'required|integer|exists:users,id',
+            'amount' => 'required|numeric|min:0',
+            'year' => 'required|integer|in:' . date('Y'),
+            'month' => 'required|integer|between:1,12',
+        ]);
+
+        $revenue = Revenue::create([
+            'id_user' => $request->id_user,
+            'amount' => $request->amount,
+            'year' => $request->year,
+            'month' => $request->month,
+        ]);
+
+        return response()->json([
+            'message' => 'Revenue added successfully',
+            'data' => new RevenueResource($revenue),
+        ], 201);
     }
 
     public function show($id)
