@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('revenue_goal', function (Blueprint $table) {
-            $table->id('id_goal');
+        Schema::create('monthly_revenu', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->decimal('amount', 10, 2)->nullable();
             $table->integer('year');
             $table->integer('month');
-            $table->decimal('amount', 10, 2)->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->foreign('id_user')->references('id')->on('users');
             $table->unique(['id_user', 'year', 'month']);
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('revenue_goal');
+        Schema::dropIfExists('monthly_revenu');
     }
 };
