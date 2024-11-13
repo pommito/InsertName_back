@@ -14,10 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->updateOrCreate([
-            'name' => 'Pommito',
-            'email' => env('ADMIN_EMAIL'),
-            'password' => Hash::make(env('ADMIN_PASSWORD')),
+        $this->call([
+            UserSeeder::class,
+            RevenueSeeder::class,
         ]);
     }
 }
