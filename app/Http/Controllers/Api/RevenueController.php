@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-use App\Models\Revenue;
-use App\Http\Resources\RevenueResource;
 use Illuminate\Http\Request;
+use App\Models\Revenue;
+use App\Http\Resources\RevenueRessource;
+use Illuminate\Support\Facades\Validator;
 
 class RevenueController extends Controller
 {
@@ -17,18 +18,36 @@ class RevenueController extends Controller
             return response()->json(['message' => 'No revenues found'], 404);
         }
 
-        return response()->json(RevenueResource::collection($revenues));
+        return response()->json(RevenueRessource::collection($revenues));
     }
 
+    public function show($id)
+    {
+        $revenue = Revenue::find($id);
+
+        if (!$revenue) {
+            return response()->json(['message' => 'Revenue not found'], 404);
+        }
+
+        return response()->json(new RevenueRessource($revenue));
+    }
 
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'id_user' => 'required|integer|exists:users,id',
             'amount' => 'required|numeric|min:0',
             'year' => 'required|integer|in:' . date('Y'),
             'month' => 'required|integer|between:1,12',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Fields validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         $revenue = Revenue::create([
             'id_user' => $request->id_user,
@@ -39,22 +58,57 @@ class RevenueController extends Controller
 
         return response()->json([
             'message' => 'Revenue added successfully',
-            'data' => new RevenueResource($revenue),
+            'data' => new RevenueRessource($revenue),
         ], 201);
-    }
-
-    public function show($id)
-    {
-        return response()->json(['message' => 'Hello World']);
     }
 
     public function update(Request $request, $id)
     {
-        return response()->json(['message' => 'Hello World']);
+        $validator = Validator::make($request->all(), [
+            'id_user' => 'required|integer|exists:users,id',
+            'amount' => 'required|numeric|min:0',
+            'year' => 'required|integer|in:' . date('Y'),
+            'month' => 'required|integer|between:1,12',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Fields validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $revenue = Revenue::find($id);
+
+        if (!$revenue) {
+            return response()->json(['message' => 'Revenue not found'], 404);
+        }
+
+        $revenue->update([
+            'id_user' => $request->id_user,
+            'amount' => $request->amount,
+            'year' => $request->year,
+            'month' => $request->month,
+        ]);
+
+        return response()->json([
+            'message' => 'Revenue updated successfully',
+            'data' => new RevenueRessource($revenue),
+        ], 201);
     }
 
     public function destroy($id)
     {
-        return response()->json(['message' => 'Hello World']);
+        $revenue = Revenue::find($id);
+
+        if (!$revenue) {
+            return response()->json(['message' => 'Revenue not found'], 404);
+        }
+
+        $revenue->delete();
+
+        return response()->json([
+            'message' => 'Revenue deleted successfully',
+        ], 201);
     }
 }
