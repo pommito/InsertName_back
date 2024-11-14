@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Revenue;
 use App\Http\Resources\RevenueRessource;
+use App\Http\Requests\RevenueRequest;
 use Illuminate\Support\Facades\Validator;
 
 class RevenueController extends Controller
@@ -32,23 +33,8 @@ class RevenueController extends Controller
         return response()->json(new RevenueRessource($revenue));
     }
 
-    public function store(Request $request)
+    public function store(RevenueRequest $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'id_user' => 'required|integer|exists:users,id',
-            'amount' => 'required|numeric|min:0',
-            'year' => 'required|integer|in:' . date('Y'),
-            'month' => 'required|integer|between:1,12',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Fields validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
         $revenue = Revenue::create([
             'id_user' => $request->id_user,
             'amount' => $request->amount,
@@ -62,22 +48,8 @@ class RevenueController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(RevenueRequest $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'id_user' => 'required|integer|exists:users,id',
-            'amount' => 'required|numeric|min:0',
-            'year' => 'required|integer|in:' . date('Y'),
-            'month' => 'required|integer|between:1,12',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Fields validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
         $revenue = Revenue::find($id);
 
         if (!$revenue) {
