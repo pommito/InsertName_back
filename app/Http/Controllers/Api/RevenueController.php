@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RevenueRessource;
 use App\Http\Requests\RevenueRequest;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Gate;
 
 class RevenueController extends Controller implements HasMiddleware
 {
@@ -66,6 +67,8 @@ class RevenueController extends Controller implements HasMiddleware
             return response()->json(['message' => 'Revenue not found'], 404);
         }
 
+        Gate::authorize('modify', $revenue);
+
         $revenue->update([
             'user_id' => $request->user_id,
             'amount' => $request->amount,
@@ -86,6 +89,8 @@ class RevenueController extends Controller implements HasMiddleware
         if (!$revenue) {
             return response()->json(['message' => 'Revenue not found'], 404);
         }
+
+        Gate::authorize('modify', $revenue);
 
         $revenue->delete();
 
