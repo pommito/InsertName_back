@@ -1,15 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
+use Illuminate\Routing\Controllers\Middleware;
 use App\Models\Revenue;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\RevenueRessource;
 use App\Http\Requests\RevenueRequest;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class RevenueController extends Controller
+class RevenueController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
+
     public function index()
     {
         $revenues = Revenue::get();
@@ -35,12 +44,13 @@ class RevenueController extends Controller
 
     public function store(RevenueRequest $request)
     {
-        $revenue = Revenue::create([
-            'id_user' => $request->id_user,
-            'amount' => $request->amount,
-            'year' => $request->year,
-            'month' => $request->month,
-        ]);
+
+        $fields = $request->validated();
+
+        // Remove 'user_id' since it's not a column in the table
+        unset($fields['user_id']);
+
+        $revenue = $request->user()->revenues()->create($fields);
 
         return response()->json([
             'message' => 'Revenue added successfully',
@@ -57,7 +67,7 @@ class RevenueController extends Controller
         }
 
         $revenue->update([
-            'id_user' => $request->id_user,
+            'user_id' => $request->user_id,
             'amount' => $request->amount,
             'year' => $request->year,
             'month' => $request->month,

@@ -15,7 +15,7 @@ class RevenueSeeder extends Seeder
     {
         foreach (range(1, 12) as $month) {
             Revenue::create([
-                'id_user' => 1,
+                'user_id' => 1,
                 'amount' => 1200 + $month,
                 'year' => 2024,
                 'month' => $month,

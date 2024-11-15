@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RevenueGoal extends Model
 {
     protected $fillable = [
-        'id_user',
+        'user_id',
         'year',
         'amount',
     ];

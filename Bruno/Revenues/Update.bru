@@ -4,17 +4,17 @@ meta {
   seq: 5
 }
 
-get {
-  url: http://localhost:8000/api/revenues/4
+patch {
+  url: http://localhost:8000/api/revenues/1
   body: json
   auth: none
 }
 
 body:json {
   {
-    "id_user" : 1,
-    "amount" : 250,
+    "user_id" : 1,
+    "amount" : 1400,
     "year" : 2024,
-    "month" : 10
+    "month" : 1
   }
 }

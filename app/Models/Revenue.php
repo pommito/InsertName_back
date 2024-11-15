@@ -8,7 +8,7 @@ class Revenue extends Model
 {
 
     protected $fillable = [
-        'id_user',
+        'user_id',
         'amount',
         'year',
         'month',

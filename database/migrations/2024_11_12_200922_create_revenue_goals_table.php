@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('revenue_goals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('year');
             $table->decimal('amount', 10, 2)->nullable();
-            $table->unique(['id_user', 'year']);
+            $table->unique(['user_id', 'year']);
             $table->timestamps();
         });
     }

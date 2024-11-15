@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('revenues', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('amount', 10, 2)->nullable();
             $table->integer('year');
             $table->integer('month');
-            $table->unique(['id_user', 'year', 'month']);
+            $table->unique(['user_id', 'year', 'month']);
             $table->timestamps();
         });
     }

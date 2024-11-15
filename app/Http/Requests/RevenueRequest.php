@@ -22,7 +22,7 @@ class RevenueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_user' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:users,id',
             'amount' => 'required|numeric|min:0',
             'year' => 'required|integer|in:' . date('Y'),
             'month' => 'required|integer|between:1,12',
