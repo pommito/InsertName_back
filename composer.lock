@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ad6105dc71d516405cffba0b9a6e84f",
+    "content-hash": "f72e284aec6964ba6a65b4571522b0b7",
     "packages": [
         {
             "name": "brick/math",
@@ -1055,77 +1055,17 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-            "name": "laravel/breeze",
-            "version": "v2.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/breeze.git",
-                "reference": "e698f651ac55920fd2ee1336c3c6cdd2467ea784"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/e698f651ac55920fd2ee1336c3c6cdd2467ea784",
-                "reference": "e698f651ac55920fd2ee1336c3c6cdd2467ea784",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^11.0",
-                "illuminate/filesystem": "^11.0",
-                "illuminate/support": "^11.0",
-                "illuminate/validation": "^11.0",
-                "php": "^8.2.0",
-                "symfony/console": "^7.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^9.0",
-                "phpstan/phpstan": "^1.10"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Breeze\\BreezeServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Breeze\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
-            "keywords": [
-                "auth",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/breeze/issues",
-                "source": "https://github.com/laravel/breeze"
-            },
-            "time": "2024-11-12T14:56:47+00:00"
-        },
-        {
             "name": "laravel/framework",
-            "version": "v11.31.0",
+            "version": "v11.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "365090ed2c68244e3141cdb5e247cdf3dfba2c40"
+                "reference": "bc2aad63f83ee5089be7b21cf29d645ccf31e927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/365090ed2c68244e3141cdb5e247cdf3dfba2c40",
-                "reference": "365090ed2c68244e3141cdb5e247cdf3dfba2c40",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bc2aad63f83ee5089be7b21cf29d645ccf31e927",
+                "reference": "bc2aad63f83ee5089be7b21cf29d645ccf31e927",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1261,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-11-12T15:36:15+00:00"
+            "time": "2024-11-15T17:04:33+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -6183,6 +6123,66 @@
                 "source": "https://github.com/Jean85/pretty-package-versions/tree/2.0.6"
             },
             "time": "2024-03-08T09:58:59+00:00"
+        },
+        {
+            "name": "laravel/breeze",
+            "version": "v2.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "e698f651ac55920fd2ee1336c3c6cdd2467ea784"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/e698f651ac55920fd2ee1336c3c6cdd2467ea784",
+                "reference": "e698f651ac55920fd2ee1336c3c6cdd2467ea784",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^11.0",
+                "illuminate/filesystem": "^11.0",
+                "illuminate/support": "^11.0",
+                "illuminate/validation": "^11.0",
+                "php": "^8.2.0",
+                "symfony/console": "^7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^9.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Breeze\\BreezeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Breeze\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
+            "keywords": [
+                "auth",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/breeze/issues",
+                "source": "https://github.com/laravel/breeze"
+            },
+            "time": "2024-11-12T14:56:47+00:00"
         },
         {
             "name": "laravel/pail",
