@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Insertname",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

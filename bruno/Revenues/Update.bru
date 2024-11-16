@@ -1,0 +1,24 @@
+meta {
+  name: Update
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:8000/api/revenues/1
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 1|Zr2oQKDhHJj9pcxoUshiQPfL5nmk9OSmD5XEkpHf84a5e57c
+}
+
+body:json {
+  {
+    "user_id" : 1,
+    "amount" : 1600,
+    "year" : 2024,
+    "month" : 1
+  }
+}
