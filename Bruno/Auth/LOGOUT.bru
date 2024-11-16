@@ -5,14 +5,11 @@ meta {
 }
 
 post {
-  url: http://localhost:8000/api/login
+  url: http://localhost:8000/api/logout
   body: json
-  auth: none
+  auth: bearer
 }
 
-body:json {
-  {
-    "email" : "admin@example.com",
-    "password" : "admin"
-  }
+auth:bearer {
+  token: 5|ig52gG65xV0u8D5h5vn5p0kHRE2wkLVE7NT6lmt3866f95f1
 }

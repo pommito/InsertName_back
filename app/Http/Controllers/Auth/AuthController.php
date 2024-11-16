@@ -32,32 +32,47 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validated();
+    $credentials = $request->validated();
 
-        $user = User::where('email', $credentials['email'])->first();
+    $user = User::where('email', $credentials['email'])->first();
 
-        if (!$user ||!Hash::check($credentials['password'], $user->password)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
+    if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
 
-        $token = $user->createToken($user->name);
+    // // Make sure that the session is regenerated
+    // if (!$request->hasSession()) {
+    //     $request->setLaravelSession(app('session')->driver());
+    // }
 
-        return response()->json([
-            'message' => 'Logged in',
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ],
-            'token' => $token->plainTextToken,
-        ]);
+    // $request->session()->regenerate();
 
+    $token = $user->createToken($user->name);
+
+    $cookie = cookie('access_token', $token->plainTextToken, 60 * 24, '/', null, env('COOKIE_SECURE'), true, false, 'Strict');
+
+    return response()->json([
+        'message' => 'Logged in',
+        'user' => [
+        'id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,
+        ],
+    ])->withCookie($cookie);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+    $user = $request->user();
 
-        return response()->json(['message' => 'Logged out']);
+    if (!$user) {
+        return response()->json(['message' => 'Not authenticated'], 401);
+    }
+
+    $user->tokens()->delete();
+
+    $cookie = cookie('access_token', null, -1, '/', null, env('COOKIE_SECURE'), true, false, 'Strict');
+
+    return response()->json(['message' => 'Logged out successfully'])->withCookie($cookie);
     }
 }
